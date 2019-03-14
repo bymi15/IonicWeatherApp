@@ -1,0 +1,78 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon style="color: white;" name="menu"></ion-icon>
+    </button>
+    <ion-title><p class="title" *ngIf="weather">{{currentTime |  date: 'hh:mm a'}} {{weather.dt * 1000 |  date: 'EEEE, MMMM dd'}}</p></ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen class="home" overflow-scroll="false">
+  <div class="homebg"></div>
+  <div class="darknessfilter"></div>
+  <ion-grid text-center *ngIf="weather">
+    <ion-row>
+      <ion-col col-12>
+        <h2 class="loc">{{weather.name | language:lang}}</h2>
+        <div class="imgdesc">
+          <i class="weathericon wi wi-owm-{{iconDayOrNight}}-{{weather.weather[0].id}}"></i>
+          <!--<img class="img" src="https://openweathermap.org/img/w/{{weather.weather[0].icon}}.png">-->
+          <h3 class="desc">{{weather.weather[0].description}}</h3>
+        </div>
+        <h1 class="main-temp">{{weather.main.temp | temperature}}</h1>
+        
+        <ion-row class="stats">
+          <ion-col text-center col-4 class="temp vd">
+            <i class="tempicon wi wi-thermometer"></i>
+            <h4 class="minmax-temp"><i class="wi wi-direction-up"></i> {{weather.main.temp_max | temperature}} / <i class="wi wi-direction-down"></i> {{weather.main.temp_min | temperature}}</h4>
+          </ion-col>
+          <br>
+          <ion-col text-center col-4 class="humidity vd">
+            <i class="humidityicon wi wi-humidity"></i>
+            <h3 class="humidityval">{{weather.main.humidity}}%</h3>
+          </ion-col>
+          <br>
+          <ion-col text-center col-4 class="wind">
+            <!--<i class="windicon wi wi-wind towards-{{weather.wind.deg}}-deg"></i>-->
+            <i class="windicon wi wi-strong-wind"></i>
+            <h3 class="windspeed">{{weather.wind.speed | wind}}</h3>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row padding>
+      <ion-col col-12>
+        <div class="forecastgrid">
+          <div class="forecast-header">
+            <h3 class="forecast-title">{{ 'Forecast' | language:lang }}</h3>
+            <button class="morebtn" (click)="viewFullForecast(weather)">{{ 'See more' | language:lang }}</button>
+          </div>
+          <hr>
+          <ion-row class="hourlyforecast">
+            <ion-col text-center *ngFor="let weather of forecast">
+              <p>{{weather.dt * 1000 |  date: 'h:mm a'}}</p>
+              <div>
+                <i class="weathericon wi wi-owm-{{weather.weather[0].id}}"></i>
+                <br>
+                <p>{{weather.main.temp_max | temperature}} /</p>
+                <p style="color: #dfe6ea;">{{weather.main.temp_min | temperature}}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+          <hr class="dottedline">
+          <ion-row class="dailyforecast" *ngFor="let daily of dailyForecast">
+            <ion-col class="dailyforecast-icon">
+                <i class="weathericon wi wi-owm-{{daily.icon}}"></i>
+                <h4 class="dailyforecast-day">{{daily.dt * 1000 |  date: 'EEEE' | language:lang}}</h4>
+            </ion-col>
+            <ion-col class="dailyforecast-temp">
+              <h4>
+                {{daily.temp_max | temperature}} 
+                <span>{{daily.temp_min | temperature}}</span>
+              </h4>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

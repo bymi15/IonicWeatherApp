@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{city | language:lang}} {{ '5 day forecast' | language:lang }}</ion-title>
+  </ion-navbar>
+</ion-header>
+        
+<ion-content padding class="forecast">
+  <ion-list>
+    <ion-item *ngFor="let weather of forecast">
+        <ion-thumbnail item-left>
+          <i class="weathericon wi wi-owm-{{weather.weather[0].id}}"></i>
+        </ion-thumbnail>
+        <h2>{{weather.dt * 1000 |  date: 'EE hh:mm a'}}</h2>
+        <h2>{{weather.main.temp | temperature}}</h2>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

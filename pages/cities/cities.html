@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'Weather Forecast' | language:lang }}</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="addCityWeather()">
+      <ion-icon style="font-size: 30px;" name="add"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="cities">
+  <ion-list *ngIf="weatherList">
+    <ion-item-sliding *ngFor="let weather of weatherList">
+      <ion-item (click)="viewWeather(weather)">
+        <ion-thumbnail item-left>
+          <i class="weathericon wi wi-owm-{{weather.weather[0].id}}"></i>
+        </ion-thumbnail>
+        <h2>{{weather.name | language:lang}}</h2>
+        <h3>{{weather.main.temp | temperature}}</h3>
+        <p>{{weather.weather[0].description}}</p>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+      
+      <ion-item-options side="right" (ionSwipe)="removeWeather(weather)">
+        <button ion-button color="danger" (click)="removeWeather(weather)">
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

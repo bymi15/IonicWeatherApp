@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'Add City Weather' | language:lang }}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+        <ion-icon style="font-size: 30px;" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="add">
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>{{ 'City' | language:lang }}</ion-label>
+      <ion-select [(ngModel)]="data.city">
+        <ion-option value="seoul">{{ 'Seoul' | language:lang }}</ion-option>
+        <ion-option value="pohang">{{ 'Pohang' | language:lang }}</ion-option>
+        <ion-option value="incheon">{{ 'Incheon' | language:lang }}</ion-option>
+        <ion-option value="london">{{ 'London' | language:lang }}</ion-option>
+        <ion-option value="new york">{{ 'New York' | language:lang }}</ion-option>
+        <ion-option value="paris">{{ 'Paris' | language:lang }}</ion-option>
+        <ion-option value="tokyo">{{ 'Tokyo' | language:lang }}</ion-option>
+        <ion-option value="bangkok">{{ 'Bangkok' | language:lang }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block (click)="dismiss(data)">{{ 'Add Weather' | language:lang }}</button>
+  </div>
+</ion-content>

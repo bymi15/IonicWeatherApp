@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{ 'Settings' | language:lang }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="data">
+    <ion-list-header>
+      {{ 'Language' | language:lang }}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{ 'English' | language:lang }}</ion-label>
+      <ion-radio value="en" checked="true"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{ 'Korean' | language:lang }}</ion-label>
+      <ion-radio value="kr"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button block (click)="updateLanguage(data)">{{ 'Save Changes' | language:lang }}</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      {{ 'OpenWeatherMap API Key' | language:lang }}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="apiKey"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button block (click)="updateAPIKey(apiKey)">{{ 'Update Key' | language:lang }}</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{ 'Obtain an API Key by signing up for free at https://openweathermap.org/' | language:lang }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
